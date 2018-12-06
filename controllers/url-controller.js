@@ -54,8 +54,8 @@ let urlController = ({ async, request, ObjectId, cron},db) => {
         var id = req.query.id ;
         async.waterfall([dbMethods.stopMonitor(id)], (err, success)=>{
          if(err) return console.log(err);
-         console.log(success);
          res.send({success:true});
+         utility.stopScheduler(url)
      }); 
      }
 

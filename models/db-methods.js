@@ -29,7 +29,7 @@ let dbMethods = (db, ObjectId) => {
 
     const stopMonitor = (id)=>{
         return ((callback) =>{
-            db.collection('url_details').updateOne({_id:ObjectId(id)},{$set:{monitor:false}},(err, doc)=>{
+            db.collection('url_details').remove({_id:ObjectId(id)},(err, doc)=>{
                 if(err) callback(err);
                 callback(null, doc);
             });
