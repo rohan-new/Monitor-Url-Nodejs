@@ -27,7 +27,6 @@ const packages = {
 initializeDatabases().then(client => {
     db = client.db('URLS');  
     require('./routes')(packages,db)
-    
   }).catch(err => {
       console.log(err);
     console.error('Failed to make all database connections!')

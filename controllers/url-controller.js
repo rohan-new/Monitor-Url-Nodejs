@@ -14,7 +14,6 @@ let urlController = ({ async, request, ObjectId, cron},db) => {
             res.json({"success":true, "_id":success.ops[0]._id });
             utility.runScheduler(url);
         });
-
     }
 
     const getUrlDetails = (req,res)=>{
@@ -33,7 +32,7 @@ let urlController = ({ async, request, ObjectId, cron},db) => {
     
     const editUrl = (req, res) => {
        var id = req.query.id;
-       var url = req.body.url;
+       var url = req.body.url;   
        var data = req.body.data;
        async.waterfall([dbMethods.updateUrlDetails(id, url, data)], (err, success)=>{
         if(err) return console.log(err);
@@ -55,7 +54,7 @@ let urlController = ({ async, request, ObjectId, cron},db) => {
         async.waterfall([dbMethods.stopMonitor(id)], (err, success)=>{
          if(err) return console.log(err);
          res.send({success:true});
-         utility.stopScheduler(url)
+        //  utility.stopScheduler(url)
      }); 
      }
 

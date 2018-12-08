@@ -26,10 +26,13 @@ let util = (db, request, cron, async)=>{
     }
 
     const runScheduler = (url)=>{
-        cron.schedule('*/1 * * * * *', () => {
+       let task = cron.schedule('*/1 * * * * *', () => {
             console.log('running a task every one second');
             async.waterfall([ getUrlDelay(url), dbMethods.updateUrlResponses(url) ],function(err, success){
                 if(err) return console.log('Url Not Found');
+                if(success == 0){
+                    task.destroy();
+                }
             })
           });
     }

@@ -50,9 +50,16 @@ let dbMethods = (db, ObjectId) => {
     
     const updateUrlResponses = (url)=>{
         return ((delay, callback) =>{
-            db.collection('url_details').update({url:url,monitor: true},{$push:{responses:delay}},(err,doc)=>{
+            db.collection('url_details').updateOne({url:url,monitor: true},{$push:{responses:delay}},(err,doc)=>{
                 if(err) callback(err);
-                callback(null, doc);
+                console.log('rr')
+                console.log(doc.matchedCount); 
+                if(doc.matchedCount == 0){
+                    callback(null, doc.matchedCount);
+                }else{
+                    callback(null, doc);
+                }
+               
             });
         });
     }
